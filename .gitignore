@@ -1,0 +1,8 @@
+# mdBook编译结果
+book/
+
+# vscode配置文件
+.vscode
+
+# node模块
+node_modules/
