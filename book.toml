@@ -1,0 +1,16 @@
+[book]
+authors = ["gitee.com/E79180"]
+language = "zh"
+multilingual = true
+src = "src"
+title = "执业冲刺笔记"
+
+[preprocessor]
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+
+[output]
+
+[output.html]
+additional-js = ["mermaid.min.js", "mermaid-init.js"]

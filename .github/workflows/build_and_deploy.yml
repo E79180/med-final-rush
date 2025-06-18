@@ -1,0 +1,42 @@
+on:
+  push
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # 安装 mdBook
+      - name: Install mdBook
+        uses: peaceiris/actions-mdbook@v2
+
+      # 安装 go
+      - name: Setup Go
+        uses: actions/setup-go@v5
+
+      # 安装 mdbook-mermaid
+      - name: Install mdbook-mermaid
+        run: |
+          MERMAID_VERSION="0.15.0"  # 指定版本
+          curl -L https://github.com/badboy/mdbook-mermaid/releases/download/v${MERMAID_VERSION}/mdbook-mermaid-v${MERMAID_VERSION}-x86_64-unknown-linux-gnu.tar.gz | tar xvz
+          sudo mv mdbook-mermaid /usr/local/bin/
+
+      # 安装 mdbook-mergecells
+      - name: Install mdbook-mergecells
+        run: |
+          go install github.com/E79180/mdbook-mergecells@latest
+
+      # 构建文档
+      - name: Build doc
+        run: |
+          mdbook build -d public
+
+      # 部署
+      - name: Deploy to CFWorker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: 4.20.0
