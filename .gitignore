@@ -1,8 +1,14 @@
+# 忽略回收站文件
+/.trash
+
+# draw.io临时文件
+*.bkp
+
+# obsidian缓存
+/.obsidian
+
 # mdBook编译结果
 book/
 
 # vscode配置文件
 .vscode
-
-# node模块
-node_modules/
