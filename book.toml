@@ -9,7 +9,7 @@ title = "执业冲刺笔记"
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
 
-[preprocessor.mergecells]
+# [preprocessor.mergecells]
 
 [output]
 
