@@ -1,0 +1,41 @@
+on:
+  push
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # 安装 mdBook
+      - name: Install mdBook
+        run: |
+          cargo install mdbook
+
+      # 安装 go
+      - name: Setup Go
+        uses: actions/setup-go@v5
+
+      # 安装 mdbook-mermaid
+      - name: Install mdbook-mermaid
+        run: |
+          cargo install mdbook-mermaid
+
+      # 安装 mdbook-mergecells
+      - name: Install mdbook-mergecells
+        run: |
+          go install github.com/E79180/mdbook-mergecells@latest
+
+      # 构建文档
+      - name: Build doc
+        run: |
+          mdbook build -d public
+
+      # 部署
+      - name: Deploy to CFWorker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: 4.20.0
