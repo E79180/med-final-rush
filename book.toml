@@ -2,7 +2,7 @@
 authors = ["gitee.com/E79180"]
 language = "zh"
 src = "src"
-title = "执业冲刺笔记"
+title = "执业医师笔记"
 
 [preprocessor]
 
