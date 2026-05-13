@@ -2,4 +2,4 @@
 
 ## 其他学科链接直达
 
-- [外科学sur](https://med.uuyu.asia)
+- [外科学sgr](https://sgr.uuyu.tech)
